@@ -1,84 +1,141 @@
-import React, { useState } from "react";
-import { Search, ShoppingBag, Star } from "lucide-react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Love You</title>
 
-// Simple Zomato‑style food/shop listing UI
-export default function App() {
-  const [query, setQuery] = useState("");
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffe6ef;
+      font-family: "Poppins", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-  const items = [
-    {
-      id: 1,
-      name: "Pizza Italiano",
-      rating: 4.5,
-      time: "30–35 min",
-      img: "https://picsum.photos/seed/pizza/400/300",
-      tag: "Fast Food",
-    },
-    {
-      id: 2,
-      name: "Sushi House",
-      rating: 4.7,
-      time: "20–25 min",
-      img: "https://picsum.photos/seed/sushi/400/300",
-      tag: "Japanese",
-    },
-    {
-      id: 3,
-      name: "Masala Kitchen",
-      rating: 4.4,
-      time: "35–40 min",
-      img: "https://picsum.photos/seed/indian/400/300",
-      tag: "Indian",
-    },
-  ];
+    .container {
+      text-align: center;
+      padding: 40px;
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      position: relative;
+      animation: fadeIn 1s ease;
+    }
 
-  const filtered = items.filter((i) =>
-    i.name.toLowerCase().includes(query.toLowerCase())
-  );
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <header className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">FoodHub</h1>
-        <ShoppingBag />
-      </header>
+    h1 {
+      font-size: 3rem;
+      color: #ff2d75;
+      margin-bottom: 10px;
+      animation: pop 0.7s ease;
+    }
 
-      <div className="relative mb-4">
-        <Search className="absolute left-3 top-3 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search for restaurants or dishes..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-full pl-10 pr-3 py-2 rounded-xl bg-white shadow"
-        />
-      </div>
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filtered.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white rounded-2xl shadow overflow-hidden hover:scale-[1.02] transition"
-          >
-            <img src={item.img} alt={item.name} className="w-full h-48 object-cover" />
-            <div className="p-4">
-              <h2 className="font-semibold text-lg">{item.name}</h2>
-              <p className="text-gray-500 text-sm">{item.tag}</p>
+    p {
+      font-size: 1.3rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
 
-              <div className="flex justify-between mt-3 items-center">
-                <div className="flex items-center gap-1 text-yellow-500">
-                  <Star size={18} /> {item.rating}
-                </div>
-                <p className="text-gray-600 text-sm">{item.time}</p>
-              </div>
+    .heart-btn {
+      font-size: 3rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
 
-              <button className="mt-4 w-full bg-red-500 text-white py-2 rounded-xl font-semibold">
-                Order Now
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+    .heart-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .heart-btn:active {
+      transform: scale(0.9);
+    }
+
+    /* Floating hearts */
+    .floating-heart {
+      position: absolute;
+      color: #ff2d75;
+      font-size: 2rem;
+      animation: floatUp 3s ease forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0) scale(1); opacity: 1; }
+      to { transform: translateY(-250px) scale(1.5); opacity: 0; }
+    }
+
+    .typed {
+      margin-top: 15px;
+      font-size: 1.6rem;
+      color: #ff2d75;
+      font-weight: 600;
+      min-height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>❤️ I Love You ❤️</h1>
+    <p>Click the heart for a surprise.</p>
+
+    <div class="heart-btn" id="heart">💗</div>
+
+    <div class="typed" id="typed"></div>
+  </div>
+
+  <script>
+    const heart = document.getElementById("heart");
+    const typed = document.getElementById("typed");
+
+    const message = "I love you more than words can ever show. ❤️";
+
+    function typeText(text, speed = 50) {
+      typed.textContent = "";
+      let i = 0;
+      const interval = setInterval(() => {
+        typed.textContent += text[i];
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, speed);
+    }
+
+    function createFloatingHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("floating-heart");
+      heart.textContent = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = window.innerHeight + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 3000);
+    }
+
+    heart.addEventListener("click", () => {
+      typeText(message);
+      createFloatingHeart();
+      createFloatingHeart();
+      createFloatingHeart();
+    });
+  </script>
+
+</body>
+</html>
+
