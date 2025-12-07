@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Wedding — [Your Names]</title>
+  <style>
+    :root{--accent:#b76e79;--bg:#fff8f9;--muted:#6b6b6b}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#fff 0%,var(--bg) 100%);color:#222}
+    .container{max-width:980px;margin:32px auto;padding:24px}
+    header{display:flex;gap:16px;align-items:center}
+    .logo{width:84px;height:84px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#f1a6c2);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px}
+    h1{margin:.2rem 0;font-size:2rem}
+    p.lead{margin:0;color:var(--muted)}
+
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:center;margin-top:18px}
+    .card{background:white;border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,.06)}
+
+    .names{font-family:'Georgia',serif;font-size:1.6rem;text-align:left}
+    .date{font-weight:600;color:var(--accent)}
+
+    .actions{display:flex;gap:12px;margin-top:14px}
+    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+    .btn-primary{background:var(--accent);color:white}
+    .btn-ghost{background:transparent;border:1px solid rgba(0,0,0,.08)}
+
+    .countdown{display:flex;gap:12px;margin-top:14px}
+    .count-item{background:linear-gradient(180deg,#fff,#fff);padding:12px;border-radius:10px;min-width:64px;text-align:center}
+    .count-item strong{display:block;font-size:1.2rem}
+
+    .section{margin-top:20px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:.9rem}
+
+    /* responsive */
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr}
+      header{flex-direction:row}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">❤</div>
+      <div>
+        <h1>[Your Names]</h1>
+        <p class="lead">We invite you to celebrate our wedding — [Venue, City] • <span class="date">June 21, 2026</span></p>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="card">
+        <div class="names">[Partner A] &amp; [Partner B]</div>
+        <p style="color:var(--muted);margin-top:8px">Join us for a day of love, laughter and celebration. Ceremony starts at 4:00 PM followed by dinner and dancing.</p>
+
+        <div class="countdown" aria-live="polite">
+          <div class="count-item"><span id="days">—</span><small>Days</small></div>
+          <div class="count-item"><span id="hours">—</span><small>Hours</small></div>
+          <div class="count-item"><span id="minutes">—</span><small>Minutes</small></div>
+          <div class="count-item"><span id="seconds">—</span><small>Seconds</small></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="rsvpBtn">RSVP</button>
+          <a class="btn btn-ghost" id="addCal">Add to Calendar</a>
+          <button class="btn btn-ghost" id="musicToggle">Play Music ▶</button>
+        </div>
+
+        <div style="margin-top:12px;color:var(--muted);font-size:.95rem">Venue: <strong>[Venue Name]</strong><br/>Address: <span id="address">123 Example Street, City</span></div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0">Event details</h3>
+        <div class="section">
+          <strong>Ceremony</strong>
+          <p style="margin:.25rem 0;color:var(--muted)">Date: June 21, 2026 — 4:00 PM</p>
+        </div>
+        <div class="section">
+          <strong>Reception</strong>
+          <p style="margin:.25rem 0;color:var(--muted)">Immediately after the ceremony — Dinner &amp; dancing</p>
+        </div>
+
+        <div class="section">
+          <strong>Location</strong>
+          <div style="height:180px;border-radius:8px;overflow:hidden">
+            <!-- Replace src with your Google Maps embed if desired -->
+            <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!" style="border:0;width:100%;height:100%" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section card">
+      <h3 style="margin-top:0">Gallery</h3>
+      <div class="grid" id="gallery">
+        <!-- Replace images with your own or remove -->
+        <img src="https://picsum.photos/seed/photo1/800/600" style="width:100%;border-radius:8px;max-height:220px;object-fit:cover" alt="photo">
+        <img src="https://picsum.photos/seed/photo2/800/600" style="width:100%;border-radius:8px;max-height:220px;object-fit:cover" alt="photo">
+        <img src="https://picsum.photos/seed/photo3/800/600" style="width:100%;border-radius:8px;max-height:220px;object-fit:cover" alt="photo">
+      </div>
+    </div>
+
+    <div class="section card">
+      <h3 style="margin-top:0">Additional info</h3>
+      <p style="margin:6px 0;color:var(--muted)">Dress code: Semi-formal. Parking available at the venue. If you have dietary requirements, please let us know when you RSVP.</p>
+    </div>
+
+    <footer>
+      Made with ❤ — Copy this file into a GitHub repository and enable GitHub Pages to publish. Customize the text and images.
+    </footer>
+  </div>
+
+  <audio id="bgm" loop src=""></audio>
+
+  <script>
+    // ======= CONFIGURE THESE VALUES ========
+    const config = {
+      partnerA: '[Partner A]',
+      partnerB: '[Partner B]',
+      dateISO: '2026-06-21T16:00:00', // ISO date/time of ceremony in local time
+      rsvpURL: 'https://forms.gle/example', // replace with your RSVP form or page
+      mapsEmbedSrc: 'https://www.google.com/maps/embed?pb=!1m18!',
+      musicSrc: '' // optional background music file url
+    };
+    // apply config
+    document.querySelector('h1').textContent = config.partnerA + ' & ' + config.partnerB;
+    document.querySelector('.names').textContent = config.partnerA + ' • ' + config.partnerB;
+    document.querySelector('.date').textContent = new Date(config.dateISO).toLocaleString(undefined,{dateStyle:'long',timeStyle:'short'});
+    document.getElementById('rsvpBtn').addEventListener('click',()=>window.open(config.rsvpURL,'_blank'));
+    document.getElementById('map').src = config.mapsEmbedSrc;
+    const bgm = document.getElementById('bgm');
+    if(config.musicSrc) bgm.src = config.musicSrc;
+
+    // Add to calendar (simple .ics file download)
+    document.getElementById('addCal').addEventListener('click',()=>{
+      const start = new Date(config.dateISO);
+      const end = new Date(start.getTime()+1000*60*60*3); // default 3 hours
+      const pad = n=>String(n).padStart(2,'0');
+      const toICS = d=>{
+        return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z';
+      }
+      const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nUID:${Date.now()}@wedding\nDTSTAMP:${toICS(new Date())}\nDTSTART:${toICS(start)}\nDTEND:${toICS(end)}\nSUMMARY:${config.partnerA} & ${config.partnerB} Wedding\nLOCATION:${document.getElementById('address').textContent}\nEND:VEVENT\nEND:VCALENDAR`;
+      const blob = new Blob([ics],{type:'text/calendar'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'wedding.ics'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    // Music toggle
+    document.getElementById('musicToggle').addEventListener('click',function(){
+      if(!bgm.src){ alert('No music file configured. Add a URL to config.musicSrc in the HTML file.'); return; }
+      if(bgm.paused){ bgm.play(); this.textContent = 'Pause Music ⏸'; }
+      else{ bgm.pause(); this.textContent = 'Play Music ▶'; }
+    });
+
+    // Countdown
+    (function(){
+      const target = new Date(config.dateISO).getTime();
+      function tick(){
+        const now = Date.now();
+        const diff = Math.max(0,target-now);
+        const secs = Math.floor(diff/1000)%60;
+        const mins = Math.floor(diff/1000/60)%60;
+        const hours = Math.floor(diff/1000/3600)%24;
+        const days = Math.floor(diff/1000/3600/24);
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = mins;
+        document.getElementById('seconds').textContent = secs;
+        if(diff<=0) clearInterval(timer);
+      }
+      tick();
+      const timer = setInterval(tick,1000);
+    })();
+  </script>
+</body>
+</html>
